@@ -1,8 +1,9 @@
 venv/
+
 __pycache__/
 *.pyc
 
-tracks/current_track.json
-
 dashboard.log
 *.log
+
+tracks/*urrent_track.json

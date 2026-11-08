@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>TPMS + GPS Dashboard</title>
+
+    <!-- Leaflet MAP -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #eee;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 10px;
+            margin: 0;
+            background: #222;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 10px;
+        }
+
+        .box {
+            background: #222;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 280px;
+        }
+
+        #map {
+            width: 95%;
+            height: 350px;
+            margin: 10px auto;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>TPMS + GPS Dashboard</h1>
+
+<div class="container">
+    <div class="box">
+        <h2>TPMS</h2>
+        <div id="tpms">Caricamento...</div>
+    </div>
+
+    <div class="box">
+        <h2>GPS</h2>
+        <div id="gps">
+            <div>Lat: --</div>
+            <div>Lon: --</div>
+            <div>Velocità: -- km/h</div>
+            <div>Altitudine: -- m</div>
+        </div>
+    </div>
+</div>
+
+<h2 style="text-align:center;">Mappa GPS</h2>
+<div id="map"></div>
+
+<script>
+    // ============================
+    // MAPPA LEAFLET
+    // ============================
+    var map = L.map('map').setView([40.0, 15.0], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+    }).addTo(map);
+
+    var marker = L.marker([40.0, 15.0]).addTo(map);
+
+
+    // ============================
+    // AGGIORNA TPMS
+    // ============================
+    async function updateTPMS() {
+        try {
+            const response = await fetch("/data");
+            const data = await response.json();
+
+            let html = "";
+            for (const [sensor, values] of Object.entries(data)) {
+                html += `
+                    <div><b>${sensor}</b> — 
+                        ${values.pressure} bar, 
+                        ${values.temperature}°C, 
+                        batt: ${values.battery}V
+                    </div>
+                `;
+            }
+
+            document.getElementById("tpms").innerHTML = html;
+
+        } catch (e) {
+            console.log("Errore TPMS:", e);
+        }
+    }
+
+
+    // ============================
+    // AGGIORNA GPS + MAPPA
+    // ============================
+    async function updateGPS() {
+        try {
+            const response = await fetch("/gps_data");
+            const gps = await response.json();
+
+            if (gps.lat !== null && gps.lon !== null) {
+                document.getElementById("gps").innerHTML = `
+                    <div>Lat: ${gps.lat}</div>
+                    <div>Lon: ${gps.lon}</div>
+                    <div>Velocità: ${gps.speed_kmh} km/h</div>
+                    <div>Altitudine: ${gps.alt} m</div>
+                `;
+
+                // aggiorna marker sulla mappa
+                marker.setLatLng([gps.lat, gps.lon]);
+                map.setView([gps.lat, gps.lon]);
+            }
+
+        } catch (e) {
+            console.log("Errore GPS:", e);
+        }
+    }
+
+    setInterval(updateTPMS, 1000);
+    setInterval(updateGPS, 1000);
+
+    updateTPMS();
+    updateGPS();
+</script>
+
+</body>
+</html>
+

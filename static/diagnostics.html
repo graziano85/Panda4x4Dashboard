@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Diagnostica Sistema</title>
+    <link rel="stylesheet" href="diagnostics.css">
+</head>
+<body>
+
+<h1>Diagnostica Sistema</h1>
+
+<!-- ============================
+     SEZIONE SENSORI
+============================ -->
+<div class="card">
+    <h2>Sensori</h2>
+
+    <div class="row"><span>Temperatura esterna</span><span id="temp_status" class="status"></span></div>
+    <div class="row"><span>TPMS</span><span id="tpms_status" class="status"></span></div>
+    <div class="row"><span>GPS</span><span id="gps_status" class="status"></span></div>
+    <div class="row"><span>ECU / OBD-II</span><span id="obd_status" class="status"></span></div>
+</div>
+
+<!-- ============================
+     SEZIONE RETE
+============================ -->
+<div class="card">
+    <h2>Rete</h2>
+
+    <div class="row"><span>Connessione</span><span id="net_status" class="status"></span></div>
+    <div class="row"><span>IP locale</span><span id="ip_value"></span></div>
+    <div class="row"><span>Link rete</span><span id="link_status" class="status"></span></div>
+    <div class="row"><span>Gateway</span><span id="gateway_status" class="status"></span></div>
+    <div class="row"><span>Internet</span><span id="internet_status" class="status"></span></div>
+    <div class="row"><span>DNS</span><span id="dns_status" class="status"></span></div>
+    <div class="row"><span>Backend (porta 5000)</span><span id="backend_status" class="status"></span></div>
+</div>
+
+<!-- ============================
+     SEZIONE GPS (NUOVA)
+============================ -->
+<div class="card">
+    <h2>GPS</h2>
+
+    <div class="row"><span>Latitudine</span><span id="gps_lat"></span></div>
+    <div class="row"><span>Longitudine</span><span id="gps_lon"></span></div>
+    <div class="row"><span>Velocità (km/h)</span><span id="gps_speed"></span></div>
+    <div class="row"><span>Altitudine</span><span id="gps_alt"></span></div>
+    <div class="row"><span>Satelliti visibili</span><span id="gps_satellites"></span></div>
+    <div class="row"><span>Qualità Fix</span><span id="gps_fix"></span></div>
+</div>
+
+<!-- ============================
+     PULSANTI DI CONTROLLO
+============================ -->
+<div class="diag-controls">
+
+    <button class="btn-exit" onclick="window.location.href='/exit_dashboard'">
+        ⬅ Torna al Desktop
+    </button>
+
+    <button class="btn-shutdown" onclick="window.location.href='/shutdown_pi'">
+        ⏻ Spegni Raspberry
+    </button>
+
+    <button class="btn-back" onclick="window.location.href='/'">
+        ⬅ Torna alla Dashboard
+    </button>
+
+</div>
+
+<script src="diagnostics.js"></script>
+
+</body>
+</html>
+

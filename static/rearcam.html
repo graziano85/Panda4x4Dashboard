@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RetroCamera</title>
+    <style>
+        body { margin: 0; background: black; overflow: hidden; }
+        #rearcam { width: 100vw; height: 100vh; object-fit: cover; }
+        #back-btn {
+            position: absolute; top: 20px; left: 20px;
+            padding: 10px 20px; background: #ffb347;
+            color: black; font-size: 22px; border-radius: 10px;
+            cursor: pointer; z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <div id="back-btn" onclick="window.location.href='/'">← Dashboard</div>
+    <img id="rearcam" src="/rearcam_stream">
+</body>
+</html>
+

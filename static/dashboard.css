@@ -1,0 +1,420 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    width: 100%;
+    height: 100%;
+}
+#startup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    display: block;
+    z-index: 999999;
+    opacity: 1;
+    transition: opacity 1.2s ease-out;
+}
+
+/* ===============================
+   SFONDO DASHBOARD
+   =============================== */
+body {
+    margin: 0;
+    padding: 0;
+/*    background-image: url("/static/dashboard.png");*/
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: "Segoe UI", sans-serif;
+    color: #fff;
+    overflow: visible;
+}
+
+/* Porta l'immagine del cruscotto SOTTO tutto */
+#dash-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* ===============================
+   TPMS
+   =============================== */
+.tpms-value {
+    position: absolute;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.55);
+    border: 2px solid #ffb347;
+    color: #ffb347;
+    text-align: center;
+    font-size: 17px;
+    z-index: 9999;
+}
+
+.tpms-temp {
+    position: absolute;
+    top: 13px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.tpms-pressure {
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.tpms-batt {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+/* Posizioni TPMS */
+#FL { top: 117px; left: 121px; }
+#FR { top: 213px; left: 219px; }
+#RL { top: 317px; left: 119px; }
+#RR { top: 392px; left: 235px; }
+
+/* ===============================
+   VALORI SUPERIORI INDIPENDENTI
+   =============================== */
+
+/* DATA E ORA */
+#datetime {
+    position: absolute;
+    top: 38px;
+    left: 630px;
+    font-size: 38px;
+    font-weight: bold;
+    color: #ffb347;
+    text-shadow: -2px -2px 3px #000,
+                 2px -2px 3px #000,
+                -2px  2px 3px #000,
+                 2px  2px 3px #000;
+    z-index: 9999;
+}
+
+/* VELOCITÀ */
+#speed {
+    position: absolute;
+    top: 545px;
+    left: 770px;
+    font-size: 24px;
+    color: #ffb347;
+    text-shadow: -2px -2px 3px #000,
+                 2px -2px 3px #000,
+                -2px  2px 3px #000,
+                 2px  2px 3px #000;
+    z-index: 9999;
+}
+
+/* TEMPERATURA ESTERNA */
+#ext-temp {
+    position: absolute;
+    top: 20px;
+    left: 25px;
+    font-size: 35px;
+ font-weight: 750; 
+    color: #ffb347;
+    -webkit-text-stroke: 1.5px black;
+    text-shadow:
+        0px 0px 4px #000,
+        0px 0px 8px #000,
+        0px 0px 12px #000,
+        0px 0px 16px #000;
+    z-index: 9999;
+}
+
+/* GPS LATITUDINE */
+#gps-lat {
+    position: absolute;
+    top: 542px;
+    left: 95px;
+    font-size: 24px;
+    color: #ffb347;
+    text-shadow: -2px -2px 3px #000,
+                 2px -2px 3px #000,
+                -2px  2px 3px #000,
+                 2px  2px 3px #000;
+    z-index: 9999;
+}
+
+/* GPS LONGITUDINE */
+#gps-lon {
+    position: absolute;
+    top: 542px;
+    left: 290px;
+    font-size: 24px;
+    color: #ffb347;
+    text-shadow: -2px -2px 3px #000,
+                 2px -2px 3px #000,
+                -2px  2px 3px #000,
+                 2px  2px 3px #000;
+    z-index: 9999;
+}
+
+/* GPS ALTITUDINE */
+#gps-alt {
+    position: absolute;
+    top: 542px;
+    left: 500px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffb347;
+    text-shadow: -2px -2px 3px #000,
+                 2px -2px 3px #000,
+                -2px  2px 3px #000,
+                 2px  2px 3px #000;
+    z-index: 9999;
+}
+
+
+/* ===============================
+   BUSSOLA
+   =============================== */
+#compass {
+    position: absolute;
+    top: 35px;
+    left: 470px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.55);
+    border: 2px solid #ffb347;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Ago premium centrato con punta verso l'esterno */
+#compass-needle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: 50% 50%;
+    transition: transform 0.5s ease-out;
+    z-index: 10000;
+}
+
+/* Corpo dell’ago */
+#compass-needle .needle-body {
+    position: absolute;
+    left: -2px;
+    top: 0px;
+    width: 4px;
+    height: 28px;
+    background: #ffb347;
+    border-radius: 2px;
+    box-shadow: 0 0 6px #ffb347;
+}
+
+/* Punta dell’ago */
+#compass-needle .needle-tip {
+    position: absolute;
+    top: -18px;
+    left: -6px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 14px solid #ffb347;
+    filter: drop-shadow(0 0 4px #ffb347);
+}
+
+#compass-label {
+    position: absolute;
+    top: -18px;
+    font-size: 16px;
+    color: #ffb347;
+}
+
+/* ===============================
+   INCLINOMETRO 
+   =============================== */
+#gauge, #roll-gauge, #pitch-gauge {
+    display: none !important;
+}
+
+#gauge-value, .gauge-value {
+    position: relative;
+    width: 120px;
+    height: 80px;
+    text-align: center;
+}
+
+.gauge-value .label {
+    font-size: 22px;
+font-weight: bold;
+    text-shadow:
+        -2px -2px 3px #000,
+         2px -2px 3px #000,
+        -2px  2px 3px #000,
+         2px  2px 3px #000;  
+  color: #ffb347;
+    margin-bottom: 5px;
+}
+
+.gauge-value .value-text {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffb347;
+    text-shadow:
+        -2px -2px 3px #000,
+         2px -2px 3px #000,
+        -2px  2px 3px #000,
+         2px  2px 3px #000;
+}
+#inclinometer {
+    position: absolute;
+    bottom: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 40px;
+    z-index: 20000;
+}
+
+
+
+/* ===============================
+   RELÈ
+   =============================== */
+#relay-panel {
+    position: absolute;
+    top: 100px;
+    right: 10px;
+    z-index: 9999;
+}
+
+#relay-frame {
+    padding: 18px;
+    border: 4px solid #444;
+    border-radius: 12px;
+    background: rgba(20,20,20,0.85);
+    box-shadow: 0 0 15px #000;
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.relay-btn {
+    width: 50px;
+    height: 50px;
+    background: #2b2b2b;
+    border: 3px solid #555;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    box-shadow: 0 0 6px #000;
+}
+
+.relay-btn.active {
+    background: #ff7b00;
+    border-color: #ffae42;
+    box-shadow: 0 0 18px #ff7b00;
+}
+
+/* ===============================
+   ECU
+   =============================== */
+#ecu-rpm-block {
+    position: absolute;
+    font-size: 40px;
+    color: #ffb347;
+    text-shadow: 1px 1px 3px #000;
+    z-index: 99999 !important;
+}
+
+#ecu-batt-block {
+    position: absolute;
+    font-size: 28px;
+    color: #ffb347;
+    text-shadow: 1px 1px 3px #000;
+    z-index: 99999 !important;
+}
+
+#ecu-rpm-block { top: 470px; left: 430px; }
+#ecu-batt-block { top: 20px; left: 200px; }
+
+/* ===============================
+   MAPPA
+   =============================== */
+#nav-map {
+    position: absolute;
+    bottom:90px;
+    right: 20px;
+    padding: 15px 25px;
+    background: rgba(0,0,0,0.75);
+    color: #fff;
+    border-radius: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 999999;
+}
+
+/* ===============================
+   DIAGNOSTICA
+   =============================== */
+#btn_diagnostics {
+    position: absolute;
+    bottom: 80px;
+    left: 21px;
+    padding: 15px 25px;
+    background: rgba(0,0,0,0.75);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 999999;
+}
+
+#btn_diagnostics:hover {
+    background: #0099cc;
+    box-shadow: 0 0 15px #0099cc;
+}
+
+#btn-rearcam {
+    position: absolute;
+    bottom: 150px;
+    right: 30px;
+    background: #ffb347;
+    color: black;
+    font-size: 23px;
+    font-weight: bold;
+    padding: 3px 11px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 10px #000;
+    z-index: 9999;
+}
+
+#btn-rearcam:hover {
+    background: #ffd27f;
+}
+

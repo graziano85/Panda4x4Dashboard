@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>TPMS Dashboard</title>
+    <link rel="stylesheet" href="/static/dashboard.css">
+</head>
+
+<body>
+<!-- OVERLAY ANIMAZIONE DI AVVIO -->
+<div id="startup-overlay">
+    <img src="/static/startup.png" id="startup-img">
+</div>
+
+    <div id="dashboard-bg">
+        <img src="/static/dashboard.png" id="dash-image">
+
+        <!-- VALORI SUPERIORI -->
+        <span id="speed">Velocità: -- km/h</span>
+        <span id="ext-temp"></span>
+
+        <span id="gps-lat">Lat: --</span>
+        <span id="gps-lon">Lon: --</span>
+
+        <!-- ALTIMETRO DINAMICO -->
+        <span id="gps-alt" class="altimetro">Alt: -- m</span>
+
+        <span id="datetime">Data/Ora: --</span>
+
+<!-- BUSSOLA DIGITALE -->
+<div id="compass">
+    <div id="compass-needle">
+        <div class="needle-body"></div>
+        <div class="needle-tip"></div>
+    </div>
+    <div id="compass-label">N</div>
+</div>
+
+<!-- INCLINOMETRO SOLO VALORI -->
+<div id="inclinometer">
+    <div class="gauge-value">
+        <div class="label">ROLL</div>
+        <div class="value-text" id="roll-text">0°</div>
+    </div>
+
+    <div class="gauge-value">
+        <div class="label">PITCH</div>
+        <div class="value-text" id="pitch-text">0°</div>
+    </div>
+</div>
+
+
+        <!-- PANNELLO RELÈ -->
+        <div id="relay-panel">
+            <div id="relay-frame">
+
+                <button class="relay-btn" id="relay1" onclick="toggleRelay(1)">
+                    <img class="relay-icon" src="/static/icons/light.png">
+                </button>
+
+                <button class="relay-btn" id="relay2" onclick="toggleRelay(2)">
+                    <img class="relay-icon" src="/static/icons/fan.png">
+                </button>
+
+                <button class="relay-btn" id="relay3" onclick="toggleRelay(3)">
+                    <img class="relay-icon" src="/static/icons/compressor.png">
+                </button>
+
+                <button class="relay-btn" id="relay4" onclick="toggleRelay(4)">
+                    <img class="relay-icon" src="/static/icons/winch.png">
+                </button>
+
+            </div>
+        </div>
+
+        <!-- ECU -->
+        <div id="ecu-rpm-block">RPM: <span id="ecu-rpm">--</span></div>
+        <div id="ecu-batt-block">Batteria: <span id="ecu-batt">--</span> V</div>
+
+        <!-- SENSORI TPMS -->
+        <div class="tpms-value" id="FL">
+            <span class="tpms-temp">-- °C</span>
+            <span class="tpms-pressure">-- bar</span>
+            <span class="tpms-batt">-- V</span>
+        </div>
+        <div class="tpms-value" id="FR">
+            <span class="tpms-temp">-- °C</span>
+            <span class="tpms-pressure">-- bar</span>
+            <span class="tpms-batt">-- V</span>
+        </div>
+
+        <div class="tpms-value" id="RL">
+            <span class="tpms-temp">-- °C</span>
+            <span class="tpms-pressure">-- bar</span>
+            <span class="tpms-batt">-- V</span>
+        </div>
+
+        <div class="tpms-value" id="RR">
+            <span class="tpms-temp">-- °C</span>
+            <span class="tpms-pressure">-- bar</span>
+            <span class="tpms-batt">-- V</span>
+        </div>
+
+        <!-- MAPPA -->
+        <div id="nav-map" onclick="window.location.href='/map'">
+            MAPPA
+        </div>
+
+<!--pulsante retrocamera-->
+<button id="btn-rearcam">RETROCAMERA</button>
+
+
+        <!-- PULSANTE DIAGNOSTICA -->
+        <button id="btn_diagnostics" class="diag-btn" onclick="window.location.href='/static/diagnostics.html'">
+            Diagnostica
+        </button>
+
+    </div>
+
+    <script src="/static/dashboard.js"></script>
+</body>
+</html>
+

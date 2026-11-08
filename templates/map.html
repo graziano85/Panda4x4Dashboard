@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Mappa GPS</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        body { margin: 0; overflow: hidden; background: #000; }
+        #map { width: 100vw; height: 100vh; }
+
+        #back-btn {
+            position: absolute;
+            top: 530px;
+            left: 20px;
+            padding: 12px 18px;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            border-radius: 8px;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 9999;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="back-btn" onclick="window.location.href='/'">⟵ Dashboard</div>
+<div id="map"></div>
+
+<script>
+    // Inizializza mappa
+    const map = L.map('map').setView([0, 0], 15);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+    }).addTo(map);
+
+    const marker = L.marker([0, 0]).addTo(map);
+
+    function updateMap() {
+        fetch("/gps_data")
+            .then(r => r.json())
+            .then(gps => {
+                if (!gps.lat || !gps.lon) return;
+
+                const lat = gps.lat;
+                const lon = gps.lon;
+
+                marker.setLatLng([lat, lon]);
+                map.setView([lat, lon]);
+            });
+    }
+
+    setInterval(updateMap, 1000);
+</script>
+
+</body>
+</html>
+

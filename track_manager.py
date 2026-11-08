@@ -32,14 +32,16 @@ def distance_m(lat1, lon1, lat2, lon2):
     )
 
     return R * (2 * math.atan2(math.sqrt(a), math.sqrt(1 - a)))
-
-
 def add_point(lat, lon, alt=None, speed=None):
 
     global last_lat
     global last_lon
 
     if lat is None or lon is None:
+        return
+
+    # Ignora coordinate senza fix GPS
+    if lat == 0.0 and lon == 0.0:
         return
 
     if last_lat is not None:
@@ -68,7 +70,6 @@ def add_point(lat, lon, alt=None, speed=None):
     last_lon = lon
 
     save_track()
-
 
 def save_track():
 
